@@ -1,8 +1,13 @@
 __author__ = 'uiandwe'
-from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
 
 from post.models import Post
 from post.api.serializers import PostSerializer
+
+
+class PostCreateAPIView(CreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
 
 class PostListAPIView(ListAPIView):

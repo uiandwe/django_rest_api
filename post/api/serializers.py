@@ -9,6 +9,7 @@ class PostSerializer(ModelSerializer):
         model = Post
         fields = [
             'pk',
+            'user',
             'title',
             'content',
             'created_at',

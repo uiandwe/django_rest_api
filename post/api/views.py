@@ -1,8 +1,9 @@
 __author__ = 'uiandwe'
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView, CreateAPIView
-
+from rest_framework.filters import SearchFilter, OrderingFilter
 from post.models import Post
 from post.api.serializers import PostSerializer
+from django.db.models import Q
 
 
 class PostCreateAPIView(CreateAPIView):
@@ -14,13 +15,30 @@ class PostCreateAPIView(CreateAPIView):
 
 
 class PostListAPIView(ListAPIView):
-    queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [SearchFilter, OrderingFilter]
+    search_fields = ['title', 'content']
+
+    def get_queryset(self, *args, **kwargs):
+        queryset_list = Post.objects.all()
+        query = self.request.GET.get("q")
+        if query:
+            queryset_list = queryset_list.filter(
+                Q(title__icontains=query) |
+                Q(content__icontains=query) |
+                Q(user__first_name__icontains=query) |
+                Q(user__last_name__icontains=query)
+            ).distinct()
+        return queryset_list
 
 
 class PostDetailAPIView(RetrieveAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get(self, request, *args, **kwargs):
+        print(kwargs)
+        return self.retrieve(request, *args, **kwargs)
 
 
 class PostUpdateAPIView(UpdateAPIView):

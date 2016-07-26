@@ -1,6 +1,6 @@
 __author__ = 'uiandwe'
 
-from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField
+from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField, SerializerMethodField
 from post.models import Post
 
 
@@ -19,6 +19,7 @@ class PostListSerializer(ModelSerializer):
         view_name='posts-api:update',
         lookup_field='pk'
     )
+    user = SerializerMethodField()
 
     class Meta:
         model = Post
@@ -33,8 +34,12 @@ class PostListSerializer(ModelSerializer):
             'delete_url'
         ]
 
+    def get_user(self, obj):
+        return str(obj.user.username)
 
 class PostSerializer(ModelSerializer):
+    user = SerializerMethodField()
+
     class Meta:
         model = Post
         fields = [
@@ -44,3 +49,6 @@ class PostSerializer(ModelSerializer):
             'content',
             'created_at',
         ]
+
+    def get_user(self, obj):
+        return str(obj.user.username)

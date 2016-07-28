@@ -49,7 +49,7 @@ class PostUpdateAPIView(UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def perform_create(self, serializer):
+    def perform_update(self, serializer):
         serializer.save(user=self.request.user)
 
 

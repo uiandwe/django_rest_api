@@ -58,7 +58,7 @@ class PostDetailSerializer(ModelSerializer):
         return str(obj.user.username)
 
     def get_comments(self, obj):
-        c_qs = Comment.objects.filter(post=obj.id)
+        c_qs = Comment.objects.filter(post=obj.id, parent_comment__isnull=True)
         comments = CommentSerializer(c_qs, many=True).data
         return comments
 

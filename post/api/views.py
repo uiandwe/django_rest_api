@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView
 from rest_framework.filters import SearchFilter, OrderingFilter
 
 from post.models import Post
-from post.api.serializers import PostSerializer, PostListSerializer
+from post.api.serializers import PostSerializer, PostListSerializer, PostDetailSerializer
 from django.db.models import Q
 from post.api.pagination import PostLimitOffsetPagination
 
@@ -38,7 +38,7 @@ class PostListAPIView(ListAPIView):
 
 class PostDetailAPIView(RetrieveAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    serializer_class = PostDetailSerializer
 
     def get(self, request, *args, **kwargs):
         print(kwargs)

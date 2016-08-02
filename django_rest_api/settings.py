@@ -40,13 +40,14 @@ INSTALLED_APPS = [
     # third party
     'django.contrib.sites',
     'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
+    # 'rest_framework.authtoken',
+    # 'rest_auth',
+    # 'allauth',
+    # 'allauth.account',
+    # 'rest_auth.registration',
     # local apps
     'post',
+    'comments',
 ]
 
 SITE_ID = 1

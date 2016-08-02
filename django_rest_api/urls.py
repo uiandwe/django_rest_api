@@ -16,14 +16,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.views.generic import RedirectView
-from allauth.account.views import confirm_email as allauthemailconfirmation
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/posts/', include("post.api.urls", namespace="posts-api")),
-    url(r'^api/auth/', include('rest_auth.urls')),
-    url(r'^api/auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^accounts/', include('allauth.urls')),
+    url(r'^api/comments/', include("comments.api.urls", namespace="comments-api"))
+    # url(r'^api/auth/', include('rest_auth.urls')),
+    # url(r'^api/auth/registration/', include('rest_auth.registration.urls')),
+    # url(r'^accounts/', include('allauth.urls')),
 
 ]

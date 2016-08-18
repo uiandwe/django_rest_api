@@ -14,7 +14,7 @@ class PostDetailView(DetailView):
 
 
 class PostResultsView(PostDetailView):
-    template_name = "posts/results.html"
+    template_name = "post/results.html"
 
 
 class PostUpdateView(UpdateView):

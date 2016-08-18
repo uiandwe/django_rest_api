@@ -20,6 +20,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^posts/', include("post.urls", namespace="posts")),
     url(r'^api/posts/', include("post.api.urls", namespace="posts-api")),
     url(r'^api/comments/', include("comments.api.urls", namespace="comments-api"))
     # url(r'^api/auth/', include('rest_auth.urls')),
@@ -27,3 +28,12 @@ urlpatterns = [
     # url(r'^accounts/', include('allauth.urls')),
 
 ]
+
+from django.conf import settings
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]

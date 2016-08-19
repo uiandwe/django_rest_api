@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, TemplateView
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render
+
 from .models import Post
 from .forms import PostForm
 from .decorators import check_draft
@@ -33,3 +34,15 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
     return render(request, "post/post_detail.html", {"object": post})
+
+
+class PostFruitMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(PostFruitMixin, self).get_context_data(**kwargs)
+        context["has_post"] = True
+        return context
+
+
+class PostMixinListView(PostFruitMixin, TemplateView):
+    template_name = "post/mixin.html"
+

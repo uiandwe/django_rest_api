@@ -2,6 +2,11 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, TemplateView
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+
+
 
 from .models import Post
 from .forms import PostForm
@@ -29,6 +34,7 @@ class PostUpdateView(UpdateView):
         return reverse("posts:detail", kwargs={"pk": self.object.pk})
 
 
+@login_required(login_url='/login/')
 @check_draft
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -45,4 +51,3 @@ class PostFruitMixin(object):
 
 class PostMixinListView(PostFruitMixin, TemplateView):
     template_name = "post/mixin.html"
-

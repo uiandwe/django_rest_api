@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
@@ -49,5 +51,8 @@ class PostFruitMixin(object):
         return context
 
 
-class PostMixinListView(PostFruitMixin, TemplateView):
+class PostMixinListView(LoginRequiredMixin, PostFruitMixin, TemplateView):
+    login_url = '/login/'
+    redirect_field_name = 'redirect_to'
+
     template_name = "post/mixin.html"

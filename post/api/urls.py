@@ -8,9 +8,9 @@ from .views import (
     PostDetailAPIView,
     PostListAPIView,
     PostUpdateAPIView,
-    PostDeleteAPIView,
-
+    PostDeleteAPIView
 )
+
 
 
 urlpatterns = [

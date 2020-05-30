@@ -20,9 +20,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^posts/', include("post.urls", namespace="posts")),
-    url(r'^api/posts/', include("post.api.urls", namespace="posts-api")),
-    url(r'^api/comments/', include("comments.api.urls", namespace="comments-api"))
+    url(r'^posts/', include("post.urls"), name="posts"),
+    url(r'^api/posts/', include("post.api.urls"), name="posts-api"),
+    url(r'^api/comments/', include("comments.api.urls"), name="comments-api")
     # url(r'^api/auth/', include('rest_auth.urls')),
     # url(r'^api/auth/registration/', include('rest_auth.registration.urls')),
     # url(r'^accounts/', include('allauth.urls')),

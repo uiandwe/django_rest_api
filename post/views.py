@@ -1,18 +1,11 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, TemplateView
-from django.core.urlresolvers import reverse
-from django.shortcuts import get_object_or_404, render
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-
-
-from .models import Post
-from .forms import PostForm
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import ListView, DetailView, UpdateView, TemplateView
+from django.urls import reverse
 from .decorators import check_draft
+from .forms import PostForm
+from .models import Post
 
 
 class PostListView(ListView):
